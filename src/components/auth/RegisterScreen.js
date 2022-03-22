@@ -1,7 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
 
 export const RegisterScreen = () => {
+
+    const [formValues, handleInputChange] = useForm({
+        name: 'Francisco',
+        email: 'fran@gmail.com',
+        password1: '123',
+        password2: '123'
+      });
+
     return (
         <>
             <h3 className="auth__title">Register</h3>
