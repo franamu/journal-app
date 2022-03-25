@@ -7,6 +7,7 @@ import {
   Redirect
 } from "react-router-dom";
 import { login } from '../actions/auth';
+import { startLoadingNotes } from '../actions/notes';
 import { JournalScreen } from '../components/journal/JournalScreen';
 import { auth } from '../firebase/firebase-config';
 import { AuthRouter } from './AuthRouter';
@@ -21,9 +22,10 @@ export const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
+        dispatch(startLoadingNotes())
         setIsLoggedIn(true);
         setChecking(false);
         return;
